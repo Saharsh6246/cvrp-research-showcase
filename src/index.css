@@ -1,0 +1,26 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { @apply bg-cream text-char font-sans antialiased; }
+h1,h2,h3 { @apply font-serif; font-weight: 400; }
+.wrap { @apply mx-auto w-full max-w-6xl px-5 md:px-8; }
+.kicker { @apply font-mono text-[11px] uppercase tracking-[0.22em] text-gold; }
+.h2 { @apply text-4xl md:text-5xl leading-[1.08] text-maroon; }
+.dark .h2 { @apply text-cream; }
+.lead { @apply text-[17px] leading-relaxed text-char/80; }
+.dark .lead { @apply text-cream/80; }
+.card { @apply rounded-sm border border-char/15 bg-white/50 p-6; }
+.dark .card { @apply border-gold/30 bg-burgundy/60; }
+.chip { @apply inline-block rounded-sm border border-maroon/25 bg-pale px-2 py-0.5 font-mono text-[11px] text-maroon; }
+.btn { @apply inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-medium transition; }
+.btn-gold { @apply bg-gold text-char hover:bg-[#dbb65a]; }
+.btn-line { @apply border border-cream/50 text-cream hover:bg-cream/10; }
+.btn-maroon { @apply bg-maroon text-cream hover:bg-burgundy; }
+.tag-done { @apply font-mono text-[10px] uppercase tracking-widest text-maroon border border-maroon/40 px-2 py-0.5; }
+.tag-future { @apply font-mono text-[10px] uppercase tracking-widest text-gold border border-gold/70 px-2 py-0.5; }
+.eqblock { @apply overflow-x-auto border-l-2 border-gold bg-pale/60 px-5 py-4; }
+table.t { @apply w-full border-collapse text-sm; }
+table.t th { @apply border-b-2 border-maroon px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-maroon; }
+table.t td { @apply border-b border-char/10 px-3 py-2; }
+@keyframes dash { to { stroke-dashoffset: -40; } }
+.route { stroke-dasharray: 6 6; animation: dash 3s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .route { animation: none; } html { scroll-behavior: auto; } }
