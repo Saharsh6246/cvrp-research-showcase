@@ -10,8 +10,8 @@ export default function CvrpDemo() {
   const len = (r: typeof cust) => { let t = 0, p = depot; r.forEach(c => { t += Math.hypot(c.x - p[0], c.y - p[1]); p = [c.x, c.y] }); return t + Math.hypot(p[0] - depot[0], p[1] - depot[1]) }
   const total = routes.reduce((s, r) => s + len(r), 0) / 100
   return (
-    <div className="card grid gap-6 md:grid-cols-[1.4fr_1fr]">
-      <svg viewBox="0 0 600 380" className="w-full rounded-sm bg-cream" role="img" aria-label="Interactive CVRP illustration">
+    <div className="card grid min-w-0 gap-6 md:grid-cols-[1.4fr_1fr]">
+      <svg viewBox="0 0 600 380" className="h-auto w-full min-w-0 rounded-sm bg-cream" role="img" aria-label="Interactive CVRP illustration">
         {routes.map((r, i) => <polyline key={i} fill="none" stroke={COL[i % COL.length]} strokeWidth="1.8" points={[depot, ...r.map(c => [c.x, c.y]), depot].map(p => p.join(',')).join(' ')} />)}
         {routes.map((r, i) => r.map((c, j) => <circle key={`${i}-${j}`} cx={c.x} cy={c.y} r={3 + c.q * 1.3} fill={COL[i % COL.length]} opacity=".85" />))}
         <rect x={depot[0] - 9} y={depot[1] - 9} width="18" height="18" fill="#79251F" /><text x={depot[0]} y={depot[1] + 28} textAnchor="middle" fontSize="11" fontFamily="JetBrains Mono" fill="#332B29">DEPOT</text>

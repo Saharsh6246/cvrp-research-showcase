@@ -7,16 +7,16 @@ export const Reveal = ({ children, delay = 0 }: { children: ReactNode; delay?: n
 )
 
 export const Section = ({ id, kicker, title, children, dark = false, alt = false }: { id: string; kicker: string; title: string; children: ReactNode; dark?: boolean; alt?: boolean }) => (
-  <section id={id} className={`py-20 md:py-28 ${dark ? 'dark bg-maroon text-cream' : alt ? 'bg-pale/50' : ''}`}>
-    <div className="wrap">
+  <section id={id} className={`py-14 sm:py-20 md:py-28 ${dark ? 'dark bg-maroon text-cream' : alt ? 'bg-pale/50' : ''}`}>
+    <div className="wrap min-w-0">
       <Reveal><p className="kicker mb-3">{kicker}</p><h2 className="h2 max-w-3xl">{title}</h2></Reveal>
-      <div className="mt-10">{children}</div>
+      <div className="mt-8 min-w-0 sm:mt-10">{children}</div>
     </div>
   </section>
 )
 
 export const Eq = ({ tex, caption, vars }: { tex: string; caption?: string; vars?: [string, string][] }) => (
-  <div className="my-6">
+  <div className="my-6 min-w-0 max-w-full">
     <div className="eqblock text-char" dangerouslySetInnerHTML={{ __html: katex.renderToString(tex, { displayMode: true, throwOnError: false }) }} />
     {caption && <p className="mt-2 font-mono text-[11px] uppercase tracking-wider text-char/60">{caption}</p>}
     {vars && <dl className="mt-3 grid gap-x-8 gap-y-1 text-sm sm:grid-cols-2">{vars.map(([k, v]) => (
@@ -34,7 +34,7 @@ export const Counter = ({ to, label }: { to: number; label: string }) => {
     const tick = (t: number) => { const p = Math.min((t - t0) / 1400, 1); setV(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) raf = requestAnimationFrame(tick) }
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf)
   }, [inView, to])
-  return <div ref={ref} className="border-t-2 border-gold pt-3"><div className="font-serif text-5xl text-maroon">{v.toLocaleString('en-US')}</div><div className="mt-1 text-sm text-char/70">{label}</div></div>
+  return <div ref={ref} className="min-w-0 border-t-2 border-gold pt-3"><div className="font-serif text-3xl text-maroon sm:text-4xl md:text-5xl">{v.toLocaleString('en-US')}</div><div className="mt-1 text-sm text-char/70">{label}</div></div>
 }
 
 export const Tag = ({ future }: { future?: boolean }) => <span className={future ? 'tag-future' : 'tag-done'}>{future ? 'Planned' : 'Completed'}</span>

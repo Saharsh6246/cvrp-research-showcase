@@ -11,13 +11,13 @@ export const Alns = () => {
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
         <div className="card">
           <p className="kicker mb-4">Interactive workflow · step {s + 1} of {alnsSteps.length}</p>
-          <ol className="space-y-1.5">{alnsSteps.map((a, i) => <li key={a.t}><button onClick={() => setS(i)} className={`flex w-full items-center gap-3 px-3 py-2 text-left text-sm transition ${i === s ? 'bg-maroon text-cream' : 'hover:bg-pale'}`}>
-            <span className="font-mono text-xs opacity-70">{i + 1}</span>{a.t}</button></li>)}</ol>
+          <ol className="space-y-1.5">{alnsSteps.map((a, i) => <li key={a.t}><button onClick={() => setS(i)} className={`flex w-full items-center gap-3 px-2 py-2 text-left text-sm sm:px-3 transition ${i === s ? 'bg-maroon text-cream' : 'hover:bg-pale'}`}>
+            <span className="shrink-0 font-mono text-xs opacity-70">{i + 1}</span><span className="min-w-0">{a.t}</span></button></li>)}</ol>
           <div className="mt-5 flex gap-2"><button className="btn btn-maroon !px-3 !py-2" aria-label="Previous step" onClick={() => setS(Math.max(0, s - 1))}><ChevronLeft size={16} /></button>
             <button className="btn btn-maroon !px-3 !py-2" aria-label="Next step" onClick={() => setS(Math.min(alnsSteps.length - 1, s + 1))}><ChevronRight size={16} /></button></div>
         </div>
         <div className="card flex flex-col justify-center border-l-4 border-l-gold">
-          <p className="font-mono text-xs text-gold">STEP {s + 1}</p><h3 className="my-2 text-3xl text-maroon">{alnsSteps[s].t}</h3><p className="leading-relaxed text-char/80">{alnsSteps[s].d}</p>
+          <p className="font-mono text-xs text-gold">STEP {s + 1}</p><h3 className="my-2 text-2xl text-maroon sm:text-3xl">{alnsSteps[s].t}</h3><p className="leading-relaxed text-char/80">{alnsSteps[s].d}</p>
           {s === 4 && <Eq tex={String.raw`\lambda < \exp\!\left(\frac{f(s)-f(s')}{T}\right)`} caption="Boltzmann acceptance of a worse solution" />}
           {s === 5 && <Eq tex={String.raw`w \leftarrow \rho\,\frac{\pi}{c} + (1-\rho)\,w`} caption="Operator weight update at the end of a segment" vars={[['\\pi', 'operator score in the segment'], ['c', 'operator usage count'], ['\\rho', 'reaction factor (0.1)']]} />}
         </div>
@@ -32,7 +32,7 @@ export const Alns = () => {
       </div>
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <div><h3 className="mb-3 text-2xl text-maroon">Calibrated parameters</h3>
-          <table className="t"><thead><tr><th>Parameter</th><th>Dataset generation</th><th>Validation</th></tr></thead><tbody>{params.map(r => <tr key={r[0]}><td>{r[0]}</td><td className="font-mono text-xs">{r[1]}</td><td className="font-mono text-xs">{r[2]}</td></tr>)}</tbody></table>
+          <div className="scroll-x"><table className="t"><thead><tr><th>Parameter</th><th>Dataset generation</th><th>Validation</th></tr></thead><tbody>{params.map(r => <tr key={r[0]}><td>{r[0]}</td><td className="font-mono text-xs">{r[1]}</td><td className="font-mono text-xs">{r[2]}</td></tr>)}</tbody></table></div>
           <p className="mt-3 text-xs text-char/60">Validation used a larger budget (j = 200, k = 10) than dataset generation (j = 100, k = 5), as stated in the report.</p></div>
         <div className="space-y-3 text-sm leading-relaxed text-char/80"><h3 className="mb-1 text-2xl text-maroon">Annealing and removal size</h3>
           <p>Removed elements per ruin step: between <Tex t="\min(5,\,0.05x)" /> and <Tex t="\min(30,\,0.30x)" />, with <Tex t="x=\max(100,|N|)" />.</p>

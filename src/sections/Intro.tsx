@@ -19,8 +19,8 @@ export const Problem = () => (
 
 export const Background = () => (
   <Section id="background" kicker="02 · Background and original research" title="Building on Existing Research" alt>
-    <div className="grid gap-10 lg:grid-cols-2">
-      <div>
+    <div className="grid min-w-0 gap-10 lg:grid-cols-2">
+      <div className="min-w-0">
         <Reveal><p className="lead">The classic CA formulation of Daganzo (1984) splits a tour into a <b>long-haul</b> component (depot to service region) and a <b>last-mile</b> component that scales with the number of customers per tour and inversely with the square root of customer density.</p></Reveal>
         <Eq tex={String.raw`l = 2\rho + k\,\frac{c}{\sqrt{\delta}}`} caption="Daganzo (1984), as cited in the report"
           vars={[['l', 'total delivery tour length'], ['\\rho', 'average distance between depot and customers'], ['k', 'last-mile (detour) coefficient'], ['c', 'number of customers in the tour'], ['\\delta', 'customer density, n/a']]} />
@@ -28,7 +28,7 @@ export const Background = () => (
         <Eq tex={String.raw`l = 2\left[\int_X |x-\rho_x|\,f_X(x)\,dx + \int_Y |y-\rho_y|\,f_Y(y)\,dy\right] + \beta\left[\iint_{XY}\sqrt{f_{XY}(x,y)}\,dx\,dy\right]\frac{c}{\sqrt{\delta}}`} caption="General integral form (Beardwood et al., 1959; Pahwa and Jaller, 2022)"
           vars={[['f_X, f_Y', 'marginal spatial densities'], ['f_{XY}', 'joint customer density'], ['\\beta', 'constant of the last-mile term'], ['(\\rho_x,\\rho_y)', 'depot coordinates']]} />
       </div>
-      <div>
+      <div className="min-w-0">
         <Reveal><p className="lead">The foundational paper (Kirubakaran, Pahwa, Kancharla and Waller, 2026) tackles this with <b>form-agnostic symbolic regression</b>: it synthesises 1,080 distribution environments, optimises each with ALNS, and fits closed-form expressions of the form below, where <Tex t="h(\mathbf{X})" /> is the long-haul term and <Tex t="k(\mathbf{X})" /> the last-mile parameter.</p></Reveal>
         <Eq tex={String.raw`l = 2h(\mathbf{X}) + k(\mathbf{X})\,\frac{n}{\sqrt{\delta}}`} caption="Paper, Eq. 13" />
         <Reveal><p className="lead">Its recommended models for strategic use are interpretable, closed-form expressions. When complete spatial and demand information is available:</p></Reveal>
@@ -64,7 +64,7 @@ export const Objectives = () => (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {cards.map((c, k) => <Reveal key={c.t} delay={k * 0.08}><div className={`card h-full ${c.f ? 'border-dashed border-gold' : ''}`}>
         <c.i className="mb-4 text-maroon" size={26} strokeWidth={1.4} /><div className="mb-3"><Tag future={c.f} /></div>
-        <h3 className="mb-2 text-2xl text-maroon">{c.t}</h3><p className="text-sm leading-relaxed text-char/75">{c.d}</p></div></Reveal>)}
+        <h3 className="mb-2 text-xl text-maroon sm:text-2xl">{c.t}</h3><p className="text-sm leading-relaxed text-char/75">{c.d}</p></div></Reveal>)}
     </div>
   </Section>
 )
